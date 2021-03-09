@@ -113,7 +113,7 @@
 					submitHandler: function (form) {
 						$.ajax({
 							type: 'POST',
-							url: '<?=base_url('auth');?>',
+							url: '<?=base_url('Auth');?>',
 							dataType: 'json',
 							data: $('#login_form').serialize(),
 							success: function (output) {

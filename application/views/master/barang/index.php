@@ -42,21 +42,18 @@
       										<i class="fas fa-plus"></i> Tambah</a>
       								</div>
       								<div class="card-body table-responsive">
-      									<table id="example" class="table table-bordered table-striped">
+      									<table id="example" class="table table-bordered">
       										<thead>
       											<tr>
       												<th>No</th>
       												<th>Kode Barcode</th>
       												<th>Nama Barang</th>
       												<th>Kategori</th>
-													<th>Stok</th>									  
+													<th>Stok</th>	
       												<th>Harga Beli</th>
       												<th>Action</th>
       											</tr>
       										</thead>
-      										<tbody id="show_data">
-
-      										</tbody>
       									</table>
       								</div>
       								<!-- /.card-body -->
@@ -210,7 +207,7 @@
       									<input type="text" readonly id="nama_supplier" class="form-control"
       										name="nama_supplier" placeholder="Nama Supplier">
       									<div class="input-group-append">
-      										<button data-toggle="modal" data-target="#Modal-Supplier"
+      										<button id="pilih-supplier"
       											class="btn btn-outline-primary" type="button">Pilih</button>
       									</div>
       								</div>
@@ -447,7 +444,7 @@
       			</div>
       			<div class="modal-body">
       				<div class="table-responsive">
-      					<table class="table table-hover table-bordered" width="100%" cellspacing="0">
+      					<table id="table-supplier" class="table table-hover table-bordered" width="100%" cellspacing="0">
       						<thead>
       							<tr>
       								<th>No</th>
@@ -456,21 +453,6 @@
       								<th>Alamat</th>
       							</tr>
       						</thead>
-      						<?php 
-						$no=1; 
-						foreach ($supplier as $row):
-                    	?>
-      						<tr class="supplier" data-id="<?= $row['id_supplier'] ?>"
-      							data-nama="<?= $row['nama_supplier'] ?>">
-      							<td><?= $no; ?></td>
-      							<td><?= $row['id_supplier'] ?></td>
-      							<td><?= $row['nama_supplier'] ?></td>
-      							<td><?= $row['alamat'] ?></td>
-      						</tr>
-      						<?php
-							$no++;
-							endforeach;
-							?>
       					</table>
       				</div>
       			</div>

@@ -23,6 +23,7 @@ class Pelunasan extends CI_Controller
         $this->load->view('_partial/sidebar', $data);
         $this->load->view('transaksi/pelunasan/index',$data);
         $this->load->view('_partial/footer', $data);
+        $this->load->view('transaksi/js');
     }
 
     public function tambah()
@@ -39,6 +40,7 @@ class Pelunasan extends CI_Controller
         $this->load->view('_partial/sidebar', $data);
         $this->load->view('transaksi/pelunasan/tambah',$data);
         $this->load->view('_partial/footer', $data);
+        $this->load->view('transaksi/js');
     }
 
     public function simpan()

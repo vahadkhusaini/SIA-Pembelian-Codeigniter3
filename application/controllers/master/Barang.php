@@ -8,7 +8,10 @@ class Barang extends CI_Controller
         parent::__construct();
         is_logged_in();
         $this->load->library('form_validation');
+        $this->load->library('datatables');
         $this->load->model('Master_model');
+        $this->load->model('Barang_model');
+        $this->load->model('Supplier_model');
         $this->load->model('Transaksi_model');
     }
 
@@ -26,28 +29,66 @@ class Barang extends CI_Controller
         $this->load->view('_partial/sidebar', $data);
         $this->load->view('master/barang/index',$data);
         $this->load->view('_partial/footer', $data);
+        $this->load->view('master/barang/js');
     }
 
-    function show_barang()
+    function get_barang()
     {
-        $id =  $this->input->post('Id');
-        $barang = $this->Master_model->get_barang_bySupplier($id);
-        $output = '';
-        $no = 0;
-    
-						foreach($barang as $row){
-                            $no++;
-                            $output .='
-      						<tr class="barang" data-kode="'.$row['id_barang'].'"
-      							data-barcode="'.$row['kode_barcode'].'" data-nama="'.$row['nama_barang'].'"
-								data-harga="'.$row['harga_beli'].'" data-satuan="'.$row['satuan'].'">
-      							<td>'.$no.'</td>
-      							<td>'.$row['id_barang'].'</td>
-      							<td>'.$row['nama_barang'].'</td>
-      						</tr>';
-                        }
+        $list = $this->Barang_model->get_datatables();
+        $data = array();
+        $no = $_POST['start'];
+        foreach ($list as $field) {
+			$action = '<span><a href="#" data-toggle="modal" data-target="#modal-edit-barang" data-id="'.$field->id_barang.'"
+            class="edit-barang btn btn-primary"> <i class="fas fa-edit"></i></a>
 
-        echo $output;
+            <a href="#" data-id="'.$field->id_barang.'" data-nama="'.$field->nama_barang.'" class="delete-barang btn btn-danger"><i class="fas fa-trash-alt"></i></a></span>';
+            $no++;
+            $row = array();
+            $row[] = $no;
+            $row[] = $field->kode_barcode;
+            $row[] = $field->nama_barang;
+            $row[] = $field->nama_kategori;
+            $row[] = $field->stok;
+            $row[] = $field->harga_beli;
+            $row[] = $action;
+ 
+            $data[] = $row;
+        }
+		$output = array(
+			"draw" => $_POST['draw'],
+			"recordsTotal" => $this->Barang_model->count_all(),
+			"recordsFiltered" => $this->Barang_model->count_filtered(),
+			"data" => $data,
+		);
+        //output dalam format JSON
+        echo json_encode($output);
+    }
+
+    function get_supplier()
+    {
+        $list = $this->Supplier_model->get_datatables();
+        $data = array();
+        $no = $_POST['start'];
+        foreach ($list as $field) {
+			
+            $no++;
+            $row = array();
+            $row[] = $no;
+            $row[] = $field->id_supplier;
+            $row[] = $field->nama_supplier;
+            $row[] = $field->alamat;
+ 
+            $data[] = $row;
+        }
+        
+		$output = array(
+			"draw" => $_POST['draw'],
+			"recordsTotal" => $this->Supplier_model->count_all(),
+			"recordsFiltered" => $this->Supplier_model->count_filtered(),
+			"data" => $data,
+		);
+        //output dalam format JSON
+        echo json_encode($output);
     }
 
     function get_all_data()

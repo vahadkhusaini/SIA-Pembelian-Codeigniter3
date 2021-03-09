@@ -21,7 +21,7 @@
       						<i class="fas fa-plus"></i> Tambah</a>
       				</div>
       				<div class="card-body table-responsive">
-      					<table id="example1" class="table table-bordered table-striped">
+      					<table id="example" class="table table-bordered">
       						<thead>
       							<tr>
       								<th>No</th>
@@ -32,31 +32,7 @@
       								<th>Action</th>
       							</tr>
       						</thead>
-      						<tbody>
-      							<?php 
-								 	$no = 1; 
-								  foreach($supplier as $s): ?>
-      							<tr>
-      								<td><?=$no?></td>
-      								<td><?= $s['id_supplier']?></td>
-      								<td><?= $s['nama_supplier']?></td>
-      								<td><?= $s['no_telepon']?></td>
-      								<td><?= $s['alamat']?></td>
-      								<td>
-      									<a href="#" data-toggle="modal" data-target="#modal-edit-supplier"
-      										data-id="<?= $s['id_supplier'];?>" class="edit-supplier btn btn-primary">
-      										<i class="fas fa-edit"></i>
-      									</a>
-      									<a href="#" data-id="<?= $s['id_supplier'];?>"
-      										data-nama="<?= $s['nama_supplier'];?>" class="delete-supplier btn btn-danger">
-      										<i class="fas fa-trash-alt"></i>
-      									</a>
-      								</td>
-      							</tr>
-      							<?php 
-									$no++;
-								endforeach; ?>
-      						</tbody>
+      						
       					</table>
       				</div>
       				<!-- /.card-body -->

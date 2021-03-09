@@ -9,6 +9,7 @@ class Supplier extends CI_Controller
         is_logged_in();
         $this->load->library('form_validation');
         $this->load->model('Master_model');
+        $this->load->model('Supplier_model');
     }
 
     public function index()
@@ -22,6 +23,43 @@ class Supplier extends CI_Controller
         $this->load->view('_partial/sidebar', $data);
         $this->load->view('master/supplier/index',$data);
         $this->load->view('_partial/footer', $data);
+        $this->load->view('master/supplier/js');
+    }
+
+     function get_supplier()
+    {
+        $list = $this->Supplier_model->get_datatables();
+        $data = array();
+        $no = $_POST['start'];
+        foreach ($list as $field) {
+			$action = '<span>
+            <a href="#" data-toggle="modal" data-target="#modal-edit-supplier"
+      		data-id="'.$field->id_supplier.'" class="edit-supplier btn btn-primary">
+      		<i class="fas fa-edit"></i></a>
+      	    
+            <a href="#" data-id="'.$field->id_supplier.'" data-nama="'.$field->nama_supplier.'" class="delete-supplier btn btn-danger"><i class="fas fa-trash-alt"></i>
+      		</a></span>';
+
+            $no++;
+            $row = array();
+            $row[] = $no;
+            $row[] = $field->id_supplier;
+            $row[] = $field->nama_supplier;
+            $row[] = $field->no_telepon;
+            $row[] = $field->alamat;
+            $row[] = $action;
+
+            $data[] = $row;
+        }
+
+		$output = array(
+			"draw" => $_POST['draw'],
+			"recordsTotal" => $this->Supplier_model->count_all(),
+			"recordsFiltered" => $this->Supplier_model->count_filtered(),
+			"data" => $data,
+		);
+        //output dalam format JSON
+        echo json_encode($output);
     }
 
     function get_supplier_byId()
@@ -57,7 +95,8 @@ class Supplier extends CI_Controller
             ];
     
             $this->Master_model->tambah_data('supplier',$data);
-    
+            
+            $output['auto_kode'] = $this->Master_model->auto_kode('supplier','id_supplier','SPL');
             $output['status'] = 200;
             $output['message'] = 'Data berhasil disimpan';
             echo json_encode($output);

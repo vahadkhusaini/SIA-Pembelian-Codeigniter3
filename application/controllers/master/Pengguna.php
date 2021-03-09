@@ -26,6 +26,7 @@ class Pengguna extends CI_Controller
         $this->load->view('_partial/sidebar', $data);
         $this->load->view('master/pengguna/index',$data);
         $this->load->view('_partial/footer', $data);
+        $this->load->view('master/pengguna/js');
     }
 
     function get_byId()
@@ -73,11 +74,13 @@ class Pengguna extends CI_Controller
     function hapus()
     {   
         
-        $data = file_get_contents('php://input');
-        $id = json_decode($data, TRUE);
+        $id = $this->input->post('Id');
 
         $this->Master_model->hapus_data('user','id_pengguna',$id);
-        redirect('master/pengguna');
+
+        $output['status'] = 200;
+        $output['message'] = 'Data berhasil Dihapus';
+        echo json_encode($output);
     }
 
     function edit()

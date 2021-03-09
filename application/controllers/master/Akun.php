@@ -21,6 +21,7 @@ class Akun extends CI_Controller
         $this->load->view('_partial/sidebar', $data);
         $this->load->view('master/akun/index',$data);
         $this->load->view('_partial/footer', $data);
+        $this->load->view('master/akun/js');
     }
 
     function get_akun_byId()

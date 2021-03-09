@@ -4,6 +4,6 @@ function is_logged_in(){
 
     $ci = get_instance();
     if(!$ci->session->userdata('name')){
-        redirect('auth');
+        redirect('Auth');
     }
 }
