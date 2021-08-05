@@ -28,3 +28,9 @@ Instalasi
 - Password : asddsa
 
 ENJOY !!
+
+###################
+DEMO
+###################
+http://purchase.whatsmyserver.com/
+
