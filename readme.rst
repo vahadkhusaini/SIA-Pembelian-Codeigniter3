@@ -32,5 +32,5 @@ ENJOY !!
 ###################
 DEMO
 ###################
-http://purchase.whatsmyserver.com/
+https://purchase.whatsmyserver.com/
 
