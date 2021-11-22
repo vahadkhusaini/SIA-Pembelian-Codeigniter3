@@ -34,3 +34,6 @@ DEMO
 ###################
 https://purchase.whatsmyserver.com/
 
+username : admin
+password : testing
+
