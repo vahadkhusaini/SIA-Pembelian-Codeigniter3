@@ -24,8 +24,6 @@ Instalasi
 - Letakkan pada server favoritmu
 - import database sistem_pembelian.sql ( default nama database sistem_pembelian ) menggunakan phpmyadmin atau sejenisnya
 - Configurasi database di config/database.php sesuaikan dengan nama database yang telah kamu buat.
-- Username : admin/superadmin
-- Password : asddsa
 
 ENJOY !!
 
@@ -34,6 +32,6 @@ DEMO
 ###################
 https://purchase.whatsmyserver.com/
 
-username : admin
-password : testing
+- Username : admin
+- Password : testing
 
